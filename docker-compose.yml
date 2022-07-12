@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  my-favorite-star:
+    image: psb6604/my-favorite-star:latest
+    ports:
+      - "80:5000"
+  mongo:
+    image: mongo
+    volumes:
+      - mongo:/data/db/
+    ports:
+      - 27017:27017
+
+volumes:
+  mongo:
