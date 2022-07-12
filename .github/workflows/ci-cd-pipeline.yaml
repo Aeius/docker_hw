@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   build-image:
+    needs: run-test-code
     runs-on: ubuntu-latest
     steps:
       -
@@ -17,7 +18,7 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }} 
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
@@ -25,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-favorite-star:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-memo:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
